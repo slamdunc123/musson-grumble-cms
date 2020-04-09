@@ -1,0 +1,27 @@
+.main-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.main-container-row {
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	padding: 10px 10px;
+}
+
+.main-container-col {
+	width: 100%;
+}
+
+.main-container-block {
+}
+
+.main-container-block-body {
+	color: blue;
+}
+.main-container-block-head {
+	font-size: 1rem;
+	font-weight: bold;
+}

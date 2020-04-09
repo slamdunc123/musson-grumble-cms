@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css" />
   <title>Document</title>
 </head>
 
@@ -63,45 +64,54 @@
   ?>
 
   <!-- create table to display results  -->
-  <div class="container">
-    <div class="row justify-content-center">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Ingredients</th>
-            <th>Method</th>
-            <th>Cooking</th>
-            <th colspan="2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
+  <div class="main-container">
+
+
+    <?php
            while($row = $result->fetch_assoc()): ?>
+    <div class="main-container-row">
+      <div class="main-container-block">
+        <div class="main-container-block-head">Name</div>
+        <div class="main-container-block-body"><?php echo $row['name']; ?></div>
+      </div>
+      <div class="main-container-block">
+        <div class="main-container-block-head">Description</div>
+        <div class="main-container-block-body"><?php echo $row['description']; ?></div>
+      </div>
+      <div class="main-container-block">
+        <div class="main-container-block-head">Ingredients</div>
+        <div class="main-container-block-body"><?php echo $row['ingredients']; ?></div>
+      </div>
+      <div class="main-container-block">
+        <div class="main-container-block-head">Method</div>
+        <div class="main-container-block-body"><?php echo $row['method']; ?></div>
+      </div>
+      <div class="main-container-block">
+        <div class="main-container-block-head">Cooking</div>
+        <div class="main-container-block-body"><?php echo $row['cooking']; ?></div>
+      </div>
 
-          <tr>
-            <td><?php echo $row['name']; ?></td>
-            <td><?php echo $row['description']; ?></td>
-            <td><?php echo $row['ingredients']; ?></td>
-            <td><?php echo $row['method']; ?></td>
-            <td><?php echo $row['cooking']; ?></td>
-            <td>
-              <a href="index.php?edit=<?php echo $row['id']; ?>" class="btn btn-info">Edit
-              </a>
-              <a href="functions.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">Delete
-              </a>
-            </td>
-          </tr>
 
-          <?php endwhile; ?>
-        </tbody>
 
-      </table>
 
+
+      <div class="main-container-block">
+        <div class="main-container-block-body">
+          <a href="index.php?edit=<?php echo $row['id']; ?>" class="btn btn-info">Edit
+          </a>
+          <a href="functions.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">Delete
+          </a>
+        </div>
+      </div>
     </div>
 
-    <div class="row justify-content-center">
+    <?php endwhile; ?>
+
+
+  </div>
+
+  <div class="main-container-row">
+    <div class="main-container-form">
       <form action="functions.php" method="POST">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <div class="form-group">
@@ -132,16 +142,14 @@
           <?php 
               if ($update == true):
           ?>
-          <button type="submit" name="update" class="btn btn-info">Update</button>
+          <button type="submit" name="update" class="">Update</button>
           <?php else: ?>
-          <button type="submit" name="save" class="btn btn-primary">Save</button>
+          <button type="submit" name="save" class="">Save</button>
           <?php endif ?>
         </div>
       </form>
     </div>
-
-
-
+  </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">

@@ -48,18 +48,20 @@
 
 
   // select all query
-  $result = $mysqli->query("SELECT * FROM recipes") or die($mysqli->error);
+  $recipes = $mysqli->query("SELECT * FROM recipes") or die($mysqli->error);
+  $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
+
 
   // use function to display result on screen 
-  // pre_r($result);
-  // pre_r($result->fetch_assoc()); // fetch the first record if there is one
-  // pre_r($result->fetch_assoc()); // fetch the second record if there is one
+  pre_r($recipes);
+  pre_r($recipes->fetch_assoc()); // fetch the first record if there is one
+  pre_r($recipes->fetch_assoc()); // fetch the second record if there is one
 
-  // function pre_r($array){
-  //   echo '<pre>';
-  //   print_r($array);
-  //   echo '</pre>';
-  // }
+  function pre_r($array){
+    echo '<pre>';
+    print_r($array);
+    echo '</pre>';
+  }
 
   ?>
 
@@ -68,11 +70,15 @@
 
 
     <?php
-           while($row = $result->fetch_assoc()): ?>
+           while($row = $recipes->fetch_assoc()): ?>
     <div class="main-container-row">
       <div class="main-container-block">
         <div class="main-container-block-head">Name</div>
         <div class="main-container-block-body"><?php echo $row['name']; ?></div>
+      </div>
+      <div class="main-container-block">
+        <div class="main-container-block-head">Category</div>
+        <div class="main-container-block-body"><?php echo $row['category_id']; ?></div>
       </div>
       <div class="main-container-block">
         <div class="main-container-block-head">Description</div>
@@ -116,27 +122,38 @@
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <div class="form-group">
           <label>Name</label>
-          <input type="text" name="name" placeholder="Recipe name" class="form-control" value="<?php echo $name; ?>">
+          <input type="text" name="name" placeholder="Name" class="form-control" value="<?php echo $name; ?>">
+        </div>
+        <div class="form-group">
+          <label for="category">Categories</label>
+          <select id="category" name="category">
+            <?php
+           while($row = $categories->fetch_assoc()): ?>
+            <option value=<?php echo $row['name'] ?>><?php echo $row['name']; ?></option>
+            <?php endwhile; ?>
+            <!-- <option value=" Fish">Fish</option>
+            <option value="Vegetables">Vegetables</option> -->
+          </select>
         </div>
         <div class="form-group">
           <label>Description</label>
-          <input type="text" name="description" placeholder="Recipe description" class="form-control"
+          <input type="texarea" name="description" placeholder="Description" class="form-control"
             value="<?php echo $description; ?>">
         </div>
         <div class="form-group">
           <label>Ingredients</label>
-          <input type="text" name="ingredients" placeholder="Recipe ingredients" class="form-control"
-            value="<?php echo $ingredients; ?>">
+          <textarea rows="10" cols="50" name="ingredients" placeholder="Ingredients" class="form-control"><?php echo $ingredients; ?>
+          </textarea>
         </div>
         <div class="form-group">
           <label>Method</label>
-          <input type="text" name="method" placeholder="Recipe method" class="form-control"
-            value="<?php echo $method; ?>">
+          <textarea rows="10" cols="50" name="method" placeholder="Method" class="form-control"><?php echo $method; ?>
+          </textarea>
         </div>
         <div class="form-group">
           <label>Cooking</label>
-          <input type="text" name="cooking" placeholder="Recipe cooking" class="form-control"
-            value="<?php echo $cooking; ?>">
+          <textarea rows="10" cols="50" name="cooking" placeholder="Cooking Times" class="form-control"><?php echo $cooking; ?>
+          </textarea>
         </div>
         <div class="form-group">
           <?php 

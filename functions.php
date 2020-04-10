@@ -15,6 +15,7 @@ if ($dbSelector) {
 // set intial variable values 
 $id = 0;
 $name = '';
+$category = '';
 $description = '';
 $ingredients = '';
 $method = '';
@@ -26,6 +27,7 @@ $update = false;
 // check if save button clicked and save to database
 if(isset($_POST['save'])){
   $name = $_POST['name'];
+  $category = $_POST['category'];
   $description = $_POST['description'];
   $ingredients = $_POST['ingredients'];
   $method = $_POST['method'];
@@ -39,7 +41,7 @@ if(isset($_POST['save'])){
   header('location: index.php');
 
   // insert query
-  $mysqli->query("INSERT INTO recipes (name, description, ingredients, method, cooking) VALUES('$name', '$description', '$ingredients', '$method', '$cooking')") or die($mysqli->error());
+  $mysqli->query("INSERT INTO recipes (name, category, description, ingredients, method, cooking) VALUES('$name', '$category', '$description', '$ingredients', '$method', '$cooking')") or die($mysqli->error());
 }
 
 
@@ -75,6 +77,7 @@ if(isset($_GET['edit'])){
     if(!empty($result)){
       $row = $result->fetch_assoc();
       $name = $row['name'];
+      $category = $row['category'];
       $description = $row['description'];
       $ingredients = $row['ingredients'];
       $method = $row['method'];
@@ -89,6 +92,7 @@ if(isset($_GET['edit'])){
 if(isset($_POST['update'])){
   $id = $_POST['id']; 
   $name = $_POST['name']; 
+  $category = $_POST['category']; 
   $description = $_POST['description'];
   $ingredients = $_POST['ingredients'];
   $method = $_POST['method'];
@@ -102,5 +106,5 @@ if(isset($_POST['update'])){
   header('location: index.php');
 
   // update query
-  $mysqli->query("UPDATE recipes SET name='$name', description='$description', ingredients='$ingredients', method='$method', cooking='$cooking' WHERE id=$id") or die($mysqli->error());
+  $mysqli->query("UPDATE recipes SET name='$name', category='$category', description='$description', ingredients='$ingredients', method='$method', cooking='$cooking' WHERE id=$id") or die($mysqli->error());
 }

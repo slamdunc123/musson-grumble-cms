@@ -48,20 +48,13 @@
 
 
   // select all query
-  $recipes = $mysqli->query("SELECT * FROM recipes") or die($mysqli->error);
+  $recipes = $mysqli->query("SELECT recipes.id, recipes.name as r_name, recipes.category_id, recipes.description, recipes.ingredients, recipes.method, recipes.cooking, categories.name as c_name FROM recipes, categories WHERE recipes.category_id = categories.id") or die($mysqli->error);
+  // $recipes = $mysqli->query("SELECT * FROM recipes") or die($mysqli->error);
   $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
 
 
   // use function to display result on screen 
-  pre_r($recipes);
-  pre_r($recipes->fetch_assoc()); // fetch the first record if there is one
-  pre_r($recipes->fetch_assoc()); // fetch the second record if there is one
-
-  function pre_r($array){
-    echo '<pre>';
-    print_r($array);
-    echo '</pre>';
-  }
+ 
 
   ?>
 
@@ -74,11 +67,11 @@
     <div class="main-container-row">
       <div class="main-container-block">
         <div class="main-container-block-head">Name</div>
-        <div class="main-container-block-body"><?php echo $row['name']; ?></div>
+        <div class="main-container-block-body"><?php echo $row['r_name']; ?></div>
       </div>
       <div class="main-container-block">
         <div class="main-container-block-head">Category</div>
-        <div class="main-container-block-body"><?php echo $row['category_id']; ?></div>
+        <div class="main-container-block-body"><?php echo $row['c_name']; ?></div>
       </div>
       <div class="main-container-block">
         <div class="main-container-block-head">Description</div>
@@ -129,7 +122,7 @@
           <select id="category" name="category">
             <?php
            while($row = $categories->fetch_assoc()): ?>
-            <option value=<?php echo $row['name'] ?>><?php echo $row['name']; ?></option>
+            <option value=<?php echo $row['id'] ?>><?php echo $row['name']; ?></option>
             <?php endwhile; ?>
             <!-- <option value=" Fish">Fish</option>
             <option value="Vegetables">Vegetables</option> -->

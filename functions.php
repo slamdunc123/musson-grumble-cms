@@ -37,11 +37,15 @@ if(isset($_POST['save'])){
   $_SESSION['message'] = 'Recipe has been saved!';
   $_SESSION['msg_type'] = 'success';
 
+  echo '<prev>';
+  print_r($_POST);
+  echo '</prev>';
+
   // redirect user 
-  header('location: index.php');
+  // header('location: index.php');
 
   // insert query
-  $mysqli->query("INSERT INTO recipes (name, category, description, ingredients, method, cooking) VALUES('$name', '$category', '$description', '$ingredients', '$method', '$cooking')") or die($mysqli->error());
+  $mysqli->query("INSERT INTO recipes (name, category_id, description, ingredients, method, cooking) VALUES('$name', '$category', '$description', '$ingredients', '$method', '$cooking')") or die($mysqli->error());
 }
 
 
@@ -77,7 +81,7 @@ if(isset($_GET['edit'])){
     if(!empty($result)){
       $row = $result->fetch_assoc();
       $name = $row['name'];
-      $category = $row['category'];
+      $category = $row['category_id'];
       $description = $row['description'];
       $ingredients = $row['ingredients'];
       $method = $row['method'];
@@ -106,5 +110,5 @@ if(isset($_POST['update'])){
   header('location: index.php');
 
   // update query
-  $mysqli->query("UPDATE recipes SET name='$name', category='$category', description='$description', ingredients='$ingredients', method='$method', cooking='$cooking' WHERE id=$id") or die($mysqli->error());
+  $mysqli->query("UPDATE recipes SET name='$name', category_id='$category', description='$description', ingredients='$ingredients', method='$method', cooking='$cooking' WHERE id=$id") or die($mysqli->error());
 }

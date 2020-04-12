@@ -1,16 +1,10 @@
-<?php session_start(); 
-
+<?php session_start(); ?>
+<?php 
 // DB 
 // database connection 
+require_once 'db.php'; ?>
 
-$dbSelector = false;
-if ($dbSelector) {
-  $mysqli = new mysqli('localhost', 'slamdunc_admin', 'PHPb0bbins1', 'slamdunc_musson_grumble') or die($mysqli->error());
-} else {
-  $mysqli = new mysqli('localhost', 'root', '', 'musson_grumble') or die($mysqli->error());
-}
-
-
+<?php
 // VARIABLES
 // set intial variable values 
 $id = 0;

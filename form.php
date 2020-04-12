@@ -1,7 +1,5 @@
-<?php require_once 'header.php'; ?>
-
-<?php require_once 'functions.php'; ?>
-<?php require_once 'db.php'; ?>
+<?php include 'functions.php'; ?>
+<?php include 'db.php'; ?>
 <?php
 $recipeCategoryId = '';
     // if edit button clicked pass edit value in $_GET to query to get single recipe
@@ -17,7 +15,7 @@ $recipeCategoryId = '';
 $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
 
 ?>
-
+<?php require 'header.php'; ?>
 <!-- form  -->
 <div class="main-container-row">
   <div class="main-container-form">
@@ -50,17 +48,17 @@ $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
       </div>
       <div class="form-group">
         <label>Ingredients</label>
-        <textarea rows="10" cols="50" name="ingredients" placeholder="Ingredients"
+        <textarea rows="5" cols="5" name="ingredients" placeholder="Ingredients"
           class="form-control"><?php echo $ingredients ?></textarea>
       </div>
       <div class="form-group">
         <label>Method</label>
-        <textarea rows="10" cols="50" name="method" placeholder="Method"
+        <textarea rows="5" cols="5" name="method" placeholder="Method"
           class="form-control"><?php echo $method ?></textarea>
       </div>
       <div class="form-group">
         <label>Cooking</label>
-        <textarea rows="10" cols="50" name="cooking" placeholder="Cooking Times"
+        <textarea rows="5" cols="5" name="cooking" placeholder="Cooking Instructions"
           class="form-control"><?php echo $cooking ?></textarea>
       </div>
       <div class="form-group">
@@ -76,4 +74,4 @@ $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
   </div>
 </div>
 
-<?php require_once 'footer.php'; ?>
+<?php require 'footer.php'; ?>

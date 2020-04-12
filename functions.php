@@ -1,10 +1,20 @@
-<?php session_start(); ?>
-<?php 
+<?php
+//===== SESSION START
+
+// start the session - there can't be anything before the <?php tag else the header will fail
+session_start();
+
+//===== CHECK FOR CODE ERRORS
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // DB 
 // database connection 
-require_once 'db.php'; ?>
+require 'db.php';
 
-<?php
+
 // VARIABLES
 // set intial variable values 
 $id = 0;
@@ -30,10 +40,6 @@ if(isset($_POST['save'])){
   // set session variables and bootstrap class
   $_SESSION['message'] = 'Recipe has been saved!';
   $_SESSION['msg_type'] = 'success';
-
-  echo '<prev>';
-  print_r($_POST);
-  echo '</prev>';
 
   // redirect user 
   header('location: index.php');

@@ -42,7 +42,7 @@ if(isset($_POST['save'])){
   echo '</prev>';
 
   // redirect user 
-  // header('location: index.php');
+  header('location: index.php');
 
   // insert query
   $mysqli->query("INSERT INTO recipes (name, category_id, description, ingredients, method, cooking) VALUES('$name', '$category', '$description', '$ingredients', '$method', '$cooking')") or die($mysqli->error());

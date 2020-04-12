@@ -46,24 +46,28 @@
         $mysqli = new mysqli('localhost', 'root', '', 'musson_grumble') or die($mysqli->error());
       }
 
+    $recipeCategoryId = '';
+    // if edit button clicked pass edit value in $_GET to query to get single recipe
+    if(isset($_GET['edit'])){
+      
+      $recipe = $mysqli->query("SELECT * from recipes WHERE recipes.id = {$_GET['edit']}") or die($mysqli->error);
 
+      while($row = $recipe->fetch_assoc()){
+          $recipeCategoryId = $row['category_id'];
+      }
+    }
+ 
   // select all query
   $recipes = $mysqli->query("SELECT recipes.id, recipes.name as r_name, recipes.category_id, recipes.description, recipes.ingredients, recipes.method, recipes.cooking, categories.name as c_name FROM recipes, categories WHERE recipes.category_id = categories.id") or die($mysqli->error);
-  // $recipes = $mysqli->query("SELECT * FROM recipes") or die($mysqli->error);
   $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
-
-
-  // use function to display result on screen 
- 
 
   ?>
 
   <!-- create table to display results  -->
   <div class="main-container">
-
-
     <?php
-           while($row = $recipes->fetch_assoc()): ?>
+        while($row = $recipes->fetch_assoc()): ?>
+    <!-- table  -->
     <div class="main-container-row">
       <div class="main-container-block">
         <div class="main-container-block-head">Name</div>
@@ -89,11 +93,6 @@
         <div class="main-container-block-head">Cooking</div>
         <div class="main-container-block-body"><?php echo $row['cooking']; ?></div>
       </div>
-
-
-
-
-
       <div class="main-container-block">
         <div class="main-container-block-body">
           <a href="index.php?edit=<?php echo $row['id']; ?>" class="btn btn-info">Edit
@@ -103,63 +102,74 @@
         </div>
       </div>
     </div>
-
     <?php endwhile; ?>
 
 
-  </div>
+    <!-- form  -->
+    <div class="main-container-row">
+      <div class="main-container-form">
+        <form action="functions.php" method="POST">
+          <input type="hidden" name="id" value="<?php echo $id; ?>">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Name" class="form-control" value="<?php echo $name; ?>">
+          </div>
+          <div class="form-group">
+            <label for="category">Categories</label>
+            <br>
+            <select id="category" name="category">
+              <?php
 
-  <div class="main-container-row">
-    <div class="main-container-form">
-      <form action="functions.php" method="POST">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" name="name" placeholder="Name" class="form-control" value="<?php echo $name; ?>">
-        </div>
-        <div class="form-group">
-          <label for="category">Categories</label>
-          <select id="category" name="category">
-            <?php
            while($row = $categories->fetch_assoc()): ?>
-            <option value=<?php echo $row['id'] ?>><?php echo $row['name']; ?></option>
-            <?php endwhile; ?>
-            <!-- <option value=" Fish">Fish</option>
-            <option value="Vegetables">Vegetables</option> -->
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Description</label>
-          <input type="texarea" name="description" placeholder="Description" class="form-control"
-            value="<?php echo $description; ?>">
-        </div>
-        <div class="form-group">
-          <label>Ingredients</label>
-          <textarea rows="10" cols="50" name="ingredients" placeholder="Ingredients" class="form-control"><?php echo $ingredients; ?>
-          </textarea>
-        </div>
-        <div class="form-group">
-          <label>Method</label>
-          <textarea rows="10" cols="50" name="method" placeholder="Method" class="form-control"><?php echo $method; ?>
-          </textarea>
-        </div>
-        <div class="form-group">
-          <label>Cooking</label>
-          <textarea rows="10" cols="50" name="cooking" placeholder="Cooking Times" class="form-control"><?php echo $cooking; ?>
-          </textarea>
-        </div>
-        <div class="form-group">
-          <?php 
+              <option value="<?php echo $row['id'] ?>" <?php 
+              // display selected value in category dropdown on edit - not working
+              // while($row2 = $categories2->fetch_assoc()){
+                // if ($_GET['edit'] == $row2['r_id']) {echo 'selected="selected"';}
+                if ($row['id'] == $recipeCategoryId) echo 'selected';
+              // }
+            ?>>
+                <?php 
+
+              echo $row['name']; 
+
+              ?>
+
+              </option>
+              <?php endwhile ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <input type="texarea" name="description" placeholder="Description" class="form-control"
+              value="<?php echo $description; ?>">
+          </div>
+          <div class="form-group">
+            <label>Ingredients</label>
+            <textarea rows="10" cols="50" name="ingredients" placeholder="Ingredients"
+              class="form-control"><?php echo $ingredients ?></textarea>
+          </div>
+          <div class="form-group">
+            <label>Method</label>
+            <textarea rows="10" cols="50" name="method" placeholder="Method"
+              class="form-control"><?php echo $method ?></textarea>
+          </div>
+          <div class="form-group">
+            <label>Cooking</label>
+            <textarea rows="10" cols="50" name="cooking" placeholder="Cooking Times"
+              class="form-control"><?php echo $cooking ?></textarea>
+          </div>
+          <div class="form-group">
+            <?php 
               if ($update == true):
           ?>
-          <button type="submit" name="update" class="">Update</button>
-          <?php else: ?>
-          <button type="submit" name="save" class="">Save</button>
-          <?php endif ?>
-        </div>
-      </form>
+            <button type="submit" name="update" class="btn btn-info">Update</button>
+            <?php else: ?>
+            <button type="submit" name="save" class="btn btn-info">Save</button>
+            <?php endif ?>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">

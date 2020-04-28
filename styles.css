@@ -1,3 +1,17 @@
+.header-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.header-title {
+	display: flex;
+}
+
+.header-menu {
+	display: flex;
+}
+
 .main-container {
 	display: flex;
 	flex-direction: column;

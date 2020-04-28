@@ -11,3 +11,15 @@
 </head>
 
 <body>
+  <div class="container">
+    <div class="header-title">
+      <h4>Musson Grumble</h4>
+
+    </div>
+    <div class="header-menu">
+      <div>
+        <div><a href="recipes.php">Recipes</div>
+        <div><a href="categories.php">Categories</div>
+      </div>
+    </div>
+  </div>

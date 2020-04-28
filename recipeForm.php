@@ -13,12 +13,17 @@ $recipeCategoryId = '';
     }
 
 $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
+$subCategories = $mysqli->query("SELECT * FROM sub_categories") or die($mysqli->error);
+
+// SELECT categories.name, sub_categories.name FROM categories LEFT OUTER JOIN sub_categories ON categories.id = sub_categories.category_id WHERE categories.id = 1
+// SELECT c.name, sc.name FROM categories c LEFT OUTER JOIN sub_categories sc ON c.id = sc.category_id WHERE c.id = 1
 
 ?>
 <?php require 'header.php'; ?>
 <!-- form  -->
 <div class="main-container-row">
   <div class="main-container-form">
+    <a href="index.php" type="button" class="btn btn-primary">Back to list</a>
     <form action="functions.php" method="POST">
       <input type="hidden" name="id" value="<?php echo $id; ?>">
       <div class="form-group">
@@ -42,9 +47,28 @@ $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
         </select>
       </div>
       <div class="form-group">
+        <label>Image</label>
+        <input type="file" name="image" placeholder="Image" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="sub-category">Sub Category</label>
+        <br>
+        <select name="sub-category" id="sub-category">
+          <?php
+              while($row = $subCategories->fetch_assoc()):
+          ?>
+          <option value="<?php echo $row['id'] ?>" <?php
+            
+          ?>>
+            <?php echo $row['name'] ?>
+          </option>
+          <?php endwhile ?>
+        </select>
+      </div>
+      <div class="form-group">
         <label>Description</label>
-        <input type="texarea" name="description" placeholder="Description" class="form-control"
-          value="<?php echo $description; ?>">
+        <textarea rows="5" cols="5" name="description" placeholder="Description"
+          class="form-control"><?php echo $description ?></textarea>
       </div>
       <div class="form-group">
         <label>Ingredients</label>
@@ -52,14 +76,14 @@ $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
           class="form-control"><?php echo $ingredients ?></textarea>
       </div>
       <div class="form-group">
-        <label>Method</label>
-        <textarea rows="5" cols="5" name="method" placeholder="Method"
-          class="form-control"><?php echo $method ?></textarea>
+        <label>Instructions</label>
+        <textarea rows="5" cols="5" name="instructions" placeholder="Instructions"
+          class="form-control"><?php echo $instructions ?></textarea>
       </div>
       <div class="form-group">
-        <label>Cooking</label>
-        <textarea rows="5" cols="5" name="cooking" placeholder="Cooking Instructions"
-          class="form-control"><?php echo $cooking ?></textarea>
+        <label>Suggestions</label>
+        <textarea rows="5" cols="5" name="suggestions" placeholder="Suggestions - hints & tips"
+          class="form-control"><?php echo $suggestions ?></textarea>
       </div>
       <div class="form-group">
         <?php 

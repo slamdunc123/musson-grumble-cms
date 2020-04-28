@@ -22,8 +22,8 @@ $name = '';
 $category = '';
 $description = '';
 $ingredients = '';
-$method = '';
-$cooking = '';
+$instructions = '';
+$suggestions = '';
 $update = false;
 
 
@@ -34,8 +34,9 @@ if(isset($_POST['save'])){
   $category = $_POST['category'];
   $description = $_POST['description'];
   $ingredients = $_POST['ingredients'];
-  $method = $_POST['method'];
-  $cooking = $_POST['cooking'];
+  $instructions = $_POST['instructions'];
+  $suggestions = $_POST['suggestions'];
+  $image = $_POST['image'];
 
   // set session variables and bootstrap class
   $_SESSION['message'] = 'Recipe has been saved!';
@@ -45,7 +46,7 @@ if(isset($_POST['save'])){
   header('location: index.php');
 
   // insert query
-  $mysqli->query("INSERT INTO recipes (name, category_id, description, ingredients, method, cooking) VALUES('$name', '$category', '$description', '$ingredients', '$method', '$cooking')") or die($mysqli->error());
+  $mysqli->query("INSERT INTO recipes (name, category_id, description, ingredients, instructions, suggestions) VALUES('$name', '$category', '$description', '$ingredients', '$instructions', '$suggestions')") or die($mysqli->error());
 }
 
 
@@ -84,8 +85,8 @@ if(isset($_GET['edit'])){
       $category = $row['category_id'];
       $description = $row['description'];
       $ingredients = $row['ingredients'];
-      $method = $row['method'];
-      $cooking = $row['cooking'];
+      $instructions = $row['instructions'];
+      $suggestions = $row['suggestions'];
     }
   
 }
@@ -99,8 +100,8 @@ if(isset($_POST['update'])){
   $category = $_POST['category']; 
   $description = $_POST['description'];
   $ingredients = $_POST['ingredients'];
-  $method = $_POST['method'];
-  $cooking = $_POST['cooking'];
+  $instructions = $_POST['instructions'];
+  $suggestions = $_POST['suggestions'];
 
   // set session variables and bootstrap class
   $_SESSION['message'] = 'Recipe has been updated!';
@@ -110,5 +111,5 @@ if(isset($_POST['update'])){
   header('location: index.php');
 
   // update query
-  $mysqli->query("UPDATE recipes SET name='$name', category_id='$category', description='$description', ingredients='$ingredients', method='$method', cooking='$cooking' WHERE id=$id") or die($mysqli->error());
+  $mysqli->query("UPDATE recipes SET name='$name', category_id='$category', description='$description', ingredients='$ingredients', instructions='$instructions', suggestions='$suggestions' WHERE id=$id") or die($mysqli->error());
 }

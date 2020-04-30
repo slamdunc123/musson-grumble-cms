@@ -1,15 +1,25 @@
 .header-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
+	justify-content: space-between;
 }
 
 .header-title {
 	display: flex;
+	align-items: center;
+	width: 50vw;
+	margin: 0 0.25rem;
 }
 
 .header-menu {
 	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 50vw;
+}
+
+.header-menu-item {
+	margin: 0 0.25rem;
 }
 
 .main-container {

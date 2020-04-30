@@ -43,7 +43,7 @@ if(isset($_POST['save'])){
   $_SESSION['msg_type'] = 'success';
 
   // redirect user 
-  header('location: index.php');
+  header('location: recipes.php');
 
   // insert query
   $mysqli->query("INSERT INTO recipes (name, category_id, description, ingredients, instructions, suggestions) VALUES('$name', '$category', '$description', '$ingredients', '$instructions', '$suggestions')") or die($mysqli->error());
@@ -60,7 +60,7 @@ if(isset($_GET['delete'])){
   $_SESSION['msg_type'] = 'danger';
 
   // redirect user 
-  header('location: index.php');
+  header('location: recipes.php');
 
   // delete query
   $mysqli->query("DELETE FROM recipes WHERE id=$id") or die($mysqli->error());
@@ -108,7 +108,7 @@ if(isset($_POST['update'])){
   $_SESSION['msg_type'] = 'success';
 
   // redirect user 
-  header('location: index.php');
+  header('location: recipes.php');
 
   // update query
   $mysqli->query("UPDATE recipes SET name='$name', category_id='$category', description='$description', ingredients='$ingredients', instructions='$instructions', suggestions='$suggestions' WHERE id=$id") or die($mysqli->error());

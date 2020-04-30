@@ -13,7 +13,7 @@ $recipeCategoryId = '';
     }
 
 $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
-$subCategories = $mysqli->query("SELECT * FROM sub_categories") or die($mysqli->error);
+// $subCategories = $mysqli->query("SELECT * FROM sub_categories") or die($mysqli->error);
 
 // SELECT categories.name, sub_categories.name FROM categories LEFT OUTER JOIN sub_categories ON categories.id = sub_categories.category_id WHERE categories.id = 1
 // SELECT c.name, sc.name FROM categories c LEFT OUTER JOIN sub_categories sc ON c.id = sc.category_id WHERE c.id = 1
@@ -23,7 +23,7 @@ $subCategories = $mysqli->query("SELECT * FROM sub_categories") or die($mysqli->
 <!-- form  -->
 <div class="main-container-row">
   <div class="main-container-form">
-    <a href="index.php" type="button" class="btn btn-primary">Back to list</a>
+    <a href="recipes.php" type="button" class="btn btn-primary">Back to list</a>
     <form action="functions.php" method="POST">
       <input type="hidden" name="id" value="<?php echo $id; ?>">
       <div class="form-group">
@@ -46,25 +46,10 @@ $subCategories = $mysqli->query("SELECT * FROM sub_categories") or die($mysqli->
           <?php endwhile ?>
         </select>
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>Image</label>
         <input type="file" name="image" placeholder="Image" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="sub-category">Sub Category</label>
-        <br>
-        <select name="sub-category" id="sub-category">
-          <?php
-              while($row = $subCategories->fetch_assoc()):
-          ?>
-          <option value="<?php echo $row['id'] ?>" <?php
-            
-          ?>>
-            <?php echo $row['name'] ?>
-          </option>
-          <?php endwhile ?>
-        </select>
-      </div>
+      </div> -->
       <div class="form-group">
         <label>Description</label>
         <textarea rows="5" cols="5" name="description" placeholder="Description"

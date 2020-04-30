@@ -25,12 +25,53 @@
 <?php endif ?>
 
 <?php
- 
-  // select all recipes
-  $recipes = $mysqli->query("SELECT recipes.id, recipes.name as r_name, recipes.category_id, recipes.description, recipes.ingredients, recipes.instructions, recipes.suggestions, categories.name as c_name FROM recipes, categories WHERE recipes.category_id = categories.id ORDER BY categories.name ASC") or die($mysqli->error);
- 
-  ?>
+
+// if(isset($_POST['submit']) )
+// {
+//   $categoryId = $_POST['categoryId'];
+//   // print_r($categoryId);
+// }
+
+?>
+
+
 <?php require 'header.php'; ?>
+
+<?php
+
+
+
+if(isset($_POST['catId'])){
+$catId = $_POST['catId'];  // Storing Selected Value In Variable
+
+} else {
+  $catId = null;
+}
+ 
+ // select all recipes
+ // $recipes = $mysqli->query("SELECT recipes.id, recipes.name as r_name, recipes.category_id, recipes.description, recipes.ingredients, recipes.instructions, recipes.suggestions, categories.name as c_name FROM recipes, categories WHERE recipes.category_id = categories.id ORDER BY categories.name ASC") or die($mysqli->error);
+
+// select recipes by category 
+ $recipes = $mysqli->query("SELECT recipes.id, recipes.name as r_name, recipes.category_id, recipes.description, recipes.ingredients, recipes.instructions, recipes.suggestions, categories.name as c_name FROM recipes, categories WHERE recipes.category_id = categories.id AND categories.id = '{$catId}'") or die($mysqli->error);
+
+ ?>
+
+<form action="recipes.php" method="POST" id="catId">
+  <select class="custom-select" name="catId" onchange='this.form.submit();'>
+    <option selected disabled>Select category</option>
+    <option value="1" <?php if (isset($catId) && $catId=="1") echo "selected";?>>Meat</option>
+    <option value="2" <?php if (isset($catId) && $catId=="2") echo "selected";?>>Fish</option>
+    <option value="3" <?php if (isset($catId) && $catId=="3") echo "selected";?>>Vegetables</option>
+    <option value="4" <?php if (isset($catId) && $catId=="4") echo "selected";?>>Rice and Pulses</option>
+    <option value="5" <?php if (isset($catId) && $catId=="5") echo "selected";?>>Eggs and Dairy</option>
+    <option value="6" <?php if (isset($catId) && $catId=="6") echo "selected";?>>Fruits</option>
+    <option value="7" <?php if (isset($catId) && $catId=="7") echo "selected";?>>Bread</option>
+    <option value="8" <?php if (isset($catId) && $catId=="8") echo "selected";?>>Pasta</option>
+  </select>
+  <!-- <input type="submit" name='select' value="Select"> -->
+</form>
+
+
 <!-- create table to display results  -->
 <div class="main-container">
   <div class="main-container-row">

@@ -36,7 +36,7 @@ if(isset($_POST['save'])){
   $ingredients = $_POST['ingredients'];
   $instructions = $_POST['instructions'];
   $suggestions = $_POST['suggestions'];
-  $image = $_POST['image'];
+  // $image = $_POST['image'];
 
   // set session variables and bootstrap class
   $_SESSION['message'] = 'Recipe has been saved!';

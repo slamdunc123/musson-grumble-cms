@@ -1,3 +1,3 @@
-UPDATE `recipes` SET `ingredients` = REPLACE(`ingredients`, '<br>', '.\r\n')
+UPDATE `recipes` SET `ingredients` = REPLACE(`ingredients`, '<br>', '\r\n')
 
 UPDATE table SET field = REPLACE(field, '. ', '.\r\n')

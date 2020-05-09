@@ -56,23 +56,6 @@ $catId = $_POST['catId'];  // Storing Selected Value In Variable
 
  ?>
 
-<form action="recipes.php" method="POST" id="catId">
-  <select class="custom-select" name="catId" onchange='this.form.submit();'>
-    <option selected disabled>Select category</option>
-    <option value="1" <?php if (isset($catId) && $catId=="1") echo "selected";?>>Meat</option>
-    <option value="2" <?php if (isset($catId) && $catId=="2") echo "selected";?>>Fish</option>
-    <option value="3" <?php if (isset($catId) && $catId=="3") echo "selected";?>>Vegetables</option>
-    <option value="4" <?php if (isset($catId) && $catId=="4") echo "selected";?>>Rice and Pulses</option>
-    <option value="5" <?php if (isset($catId) && $catId=="5") echo "selected";?>>Eggs and Dairy</option>
-    <option value="6" <?php if (isset($catId) && $catId=="6") echo "selected";?>>Fruits</option>
-    <option value="7" <?php if (isset($catId) && $catId=="7") echo "selected";?>>Bread</option>
-    <option value="8" <?php if (isset($catId) && $catId=="8") echo "selected";?>>Pasta</option>
-  </select>
-  <!-- <input type="submit" name='select' value="Select"> -->
-</form>
-
-
-<!-- create table to display results  -->
 <div class="main-container">
   <div class="main-container-row">
     <div class="main-container-block">
@@ -82,6 +65,23 @@ $catId = $_POST['catId'];  // Storing Selected Value In Variable
       </div>
     </div>
   </div>
+
+  <form action="recipes.php" method="POST" id="catId">
+    <select class="custom-select" name="catId" onchange='this.form.submit();'>
+      <option selected disabled>Select category</option>
+      <option value="1" <?php if (isset($catId) && $catId=="1") echo "selected";?>>Meat</option>
+      <option value="2" <?php if (isset($catId) && $catId=="2") echo "selected";?>>Fish</option>
+      <option value="3" <?php if (isset($catId) && $catId=="3") echo "selected";?>>Vegetables</option>
+      <option value="4" <?php if (isset($catId) && $catId=="4") echo "selected";?>>Rice and Pulses</option>
+      <option value="5" <?php if (isset($catId) && $catId=="5") echo "selected";?>>Eggs and Dairy</option>
+      <option value="6" <?php if (isset($catId) && $catId=="6") echo "selected";?>>Fruits</option>
+      <option value="7" <?php if (isset($catId) && $catId=="7") echo "selected";?>>Bread</option>
+      <option value="8" <?php if (isset($catId) && $catId=="8") echo "selected";?>>Pasta</option>
+      <option value="9" <?php if (isset($catId) && $catId=="9") echo "selected";?>>Sides and accompaniments</option>
+    </select>
+    <!-- <input type="submit" name='select' value="Select"> -->
+  </form>
+
   <?php
         while($row = $recipes->fetch_assoc()): ?>
   <!-- table  -->
@@ -114,7 +114,7 @@ $catId = $_POST['catId'];  // Storing Selected Value In Variable
       <div class="main-container-block-body">
         <a href="recipeForm.php?edit=<?php echo $row['id']; ?>" class="btn btn-info">Edit
         </a>
-        <a href="functions.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">Delete
+        <a href="functions.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger disabled">Delete
         </a>
       </div>
     </div>

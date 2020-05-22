@@ -52,7 +52,7 @@ $catId = $_POST['catId'];  // Storing Selected Value In Variable
  // $recipes = $mysqli->query("SELECT recipes.id, recipes.name as r_name, recipes.category_id, recipes.description, recipes.ingredients, recipes.instructions, recipes.suggestions, categories.name as c_name FROM recipes, categories WHERE recipes.category_id = categories.id ORDER BY categories.name ASC") or die($mysqli->error);
 
 // select recipes by category 
- $recipes = $mysqli->query("SELECT recipes.id, recipes.name as r_name, recipes.category_id, recipes.description, recipes.ingredients, recipes.instructions, recipes.suggestions, categories.name as c_name FROM recipes, categories WHERE recipes.category_id = categories.id AND categories.id = '{$catId}'") or die($mysqli->error);
+ $recipes = $mysqli->query("SELECT recipes.id, recipes.name as r_name, recipes.sub_title, recipes.category_id, recipes.description, recipes.ingredients, recipes.instructions, recipes.suggestions, categories.name as c_name FROM recipes, categories WHERE recipes.category_id = categories.id AND categories.id = '{$catId}'") or die($mysqli->error);
 
  ?>
 
@@ -89,6 +89,10 @@ $catId = $_POST['catId'];  // Storing Selected Value In Variable
     <div class="main-container-block">
       <div class="main-container-block-head">Name</div>
       <div class="main-container-block-body"><?php echo $row['r_name']; ?></div>
+    </div>
+    <div class="main-container-block">
+      <div class="main-container-block-head">Sub-Title</div>
+      <div class="main-container-block-body"><?php echo $row['sub_title']; ?></div>
     </div>
     <div class="main-container-block">
       <div class="main-container-block-head">Category</div>

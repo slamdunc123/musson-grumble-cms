@@ -31,6 +31,11 @@ $categories = $mysqli->query("SELECT * FROM categories") or die($mysqli->error);
         <input type="text" name="name" placeholder="Name" class="form-control" value="<?php echo $name; ?>">
       </div>
       <div class="form-group">
+        <label>Sub-Title</label>
+        <input type="text" name="sub_title" placeholder="Sub Title" class="form-control"
+          value="<?php echo $sub_title; ?>">
+      </div>
+      <div class="form-group">
         <label for="category">Category</label>
         <br>
         <select id="category" name="category">

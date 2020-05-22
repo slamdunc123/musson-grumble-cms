@@ -19,6 +19,7 @@ require 'db.php';
 // set intial variable values 
 $id = 0;
 $name = '';
+$sub_title = '';
 $category = '';
 $description = '';
 $ingredients = '';
@@ -31,6 +32,7 @@ $update = false;
 // check if save button clicked and save to database
 if(isset($_POST['save'])){
   $name = $_POST['name'];
+  $sub_title = $_POST['sub_title'];
   $category = $_POST['category'];
   $description = $_POST['description'];
   $ingredients = $_POST['ingredients'];
@@ -46,7 +48,7 @@ if(isset($_POST['save'])){
   header('location: recipes.php');
 
   // insert query
-  $mysqli->query("INSERT INTO recipes (name, category_id, description, ingredients, instructions, suggestions) VALUES('$name', '$category', '$description', '$ingredients', '$instructions', '$suggestions')") or die($mysqli->error());
+  $mysqli->query("INSERT INTO recipes (name, sub_title, category_id, description, ingredients, instructions, suggestions) VALUES('$name', '$sub_title', '$category', '$description', '$ingredients', '$instructions', '$suggestions')") or die($mysqli->error());
 }
 
 
@@ -82,6 +84,7 @@ if(isset($_GET['edit'])){
     if(!empty($result)){
       $row = $result->fetch_assoc();
       $name = $row['name'];
+      $sub_title = $row['sub_title'];
       $category = $row['category_id'];
       $description = $row['description'];
       $ingredients = $row['ingredients'];
@@ -97,6 +100,7 @@ if(isset($_GET['edit'])){
 if(isset($_POST['update'])){
   $id = $_POST['id']; 
   $name = $_POST['name']; 
+  $sub_title = $_POST['sub_title']; 
   $category = $_POST['category']; 
   $description = $_POST['description'];
   $ingredients = $_POST['ingredients'];
@@ -111,5 +115,5 @@ if(isset($_POST['update'])){
   header('location: recipes.php');
 
   // update query
-  $mysqli->query("UPDATE recipes SET name='$name', category_id='$category', description='$description', ingredients='$ingredients', instructions='$instructions', suggestions='$suggestions' WHERE id=$id") or die($mysqli->error());
+  $mysqli->query("UPDATE recipes SET name='$name', sub_title='$sub_title', category_id='$category', description='$description', ingredients='$ingredients', instructions='$instructions', suggestions='$suggestions' WHERE id=$id") or die($mysqli->error());
 }
